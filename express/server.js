@@ -4,6 +4,7 @@ const path = require('path');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
+var cors = require('cors');
 
 const quotes = [
   {
@@ -41,6 +42,7 @@ function randomInteger(min, max) {
 const router = express.Router();
 router.get('/', (req, res) => res.json(quotes[randomInteger(0, quotes.length - 1)]));
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
