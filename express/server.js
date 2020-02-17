@@ -41,6 +41,10 @@ function randomInteger(min, max) {
 const router = express.Router();
 router.get('/', (req, res) => res.json(quotes[randomInteger(0, quotes.length - 1)]));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
