@@ -119,7 +119,7 @@ router.get('/', (req, res) => res.json(quotes[randomInteger(0, quotes.length - 1
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/', router); 
+app.use('/randomquote', router); 
 
 module.exports = app;
 module.exports.handler = serverless(app);
