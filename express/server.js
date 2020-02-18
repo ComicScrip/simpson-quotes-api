@@ -119,7 +119,8 @@ router.get('/', (req, res) => res.json(quotes[randomInteger(0, quotes.length - 1
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/randomquote', router); 
+app.use('/.netlify/functions/server', router);  // path must route to lambda
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 module.exports = app;
 module.exports.handler = serverless(app);
